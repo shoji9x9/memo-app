@@ -17,6 +17,7 @@ export function Memo(): JSX.Element {
 
   const params = useParams();
   const id = params.id;
+  const screenTitle = (!id ? "Crate" : "Update") + " memo";
 
   const navigate = useNavigate();
 
@@ -61,7 +62,7 @@ export function Memo(): JSX.Element {
 
   return (
     <>
-      <Typography variant="h2">Crate memo</Typography>
+      <Typography variant="h2">{screenTitle}</Typography>
       <Box
         sx={{
           paddingTop: "40px",
