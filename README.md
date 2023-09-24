@@ -1,10 +1,10 @@
 # 実現したこと
 
-Vite + React（TypeScript） + Firebase の構成で
+Vite + React（TypeScript） + Firebase の構成で以下の機能を持つアプリを作成し、Firebase にホスティングした。
 
-- Google 認証機能を実装した
-- エミュレーターを利用しローカルでテストできるようにした
-- 正常にデプロイできることも確認済（ただし、React はホスティングしていない）
+- サインイン、サインアウト
+- メモの一覧表示
+- メモの登録、更新
 
 # 注意事項
 
@@ -12,4 +12,4 @@ Vite + React（TypeScript） + Firebase の構成で
 
 # 詳細
 
-[Vite + React + Firebase で Google 認証機能を作ったときのメモ](https://zenn.dev/shoji9x9/articles/0017d04299d5b8)参照。
+[React（TypeScript） + Firebase でメモアプリ開発](https://zenn.dev/shoji9x9/articles/eb185b3d66567b)参照。

@@ -15,7 +15,8 @@ service cloud.firestore {
       allow read, write: if false;
     }
     match /users/{userId}/memos/{memoId} {
-      allow read, write: if isUserAuthenticated(userId)
+      allow read, update, delete: if isUserAuthenticated(userId);
+      allow create: if isAuthenticated();
     }
   }
 }
