@@ -15,3 +15,4 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_VITE_REACT_F4C90 }}"
           projectId: vite-react-f4c90
+          entryPoint: "firebase" # ここを追加
