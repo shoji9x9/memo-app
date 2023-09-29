@@ -1,6 +1,6 @@
 # 実現したこと
 
-Vite + React（TypeScript） + Firebase の構成で以下の機能を持つアプリを作成し、Firebase にホスティングした。
+Vite + React（TypeScript） + Firebase の構成で以下の機能を持つアプリを作成し、Firebase にホスティングした。GitHub へ Push 時に Firebase にホスティングするようワークフローを設定している。
 
 - サインイン、サインアウト
 - メモの一覧表示
