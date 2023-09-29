@@ -19,3 +19,5 @@ jobs:
           channelId: live
           projectId: vite-react-f4c90
           entryPoint: "firebase" # ここを追加
+        env:
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
