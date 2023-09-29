@@ -46,7 +46,6 @@ export function MemoList(): JSX.Element {
     if (!id) {
       return;
     }
-    setClickDelete(true);
     // TODO: 例外をキャッチしメッセージを出しわける
     // TODO: メッセージを作成するユーティリティーを作る
     await deleteMemo(id, loginUser);
@@ -58,6 +57,7 @@ export function MemoList(): JSX.Element {
         severity: "success",
       };
     });
+    setClickDelete(true);
   };
 
   useEffect(() => {
