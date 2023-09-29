@@ -39,7 +39,6 @@ export function MemoList(): JSX.Element {
     if (_memoList) {
       setMemoList(_memoList);
     }
-    console.log(_memoList);
   }, [loginUser, setMemoList]);
 
   const onClickDelete = async (id?: string) => {

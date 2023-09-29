@@ -16,8 +16,6 @@ const firebaseConfig = {
   mesurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-console.log("firebaseConfig: ", firebaseConfig);
-
 const app = initializeApp(firebaseConfig);
 
 // 認証周り
