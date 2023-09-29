@@ -9,6 +9,8 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
     steps:
       - uses: actions/checkout@v3
       - run: npm ci && npm run build
@@ -19,5 +21,3 @@ jobs:
           channelId: live
           projectId: vite-react-f4c90
           entryPoint: "firebase" # ここを追加
-        env:
-          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
