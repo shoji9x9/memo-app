@@ -49,7 +49,7 @@ export function MemoList(): JSX.Element {
     setClickDelete(true);
     // TODO: 例外をキャッチしメッセージを出しわける
     // TODO: メッセージを作成するユーティリティーを作る
-    deleteMemo(id, loginUser);
+    await deleteMemo(id, loginUser);
     setMessageAtom((prev) => {
       return {
         ...prev,
