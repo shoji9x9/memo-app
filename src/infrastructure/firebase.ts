@@ -6,36 +6,15 @@ import {
 } from "firebase/auth";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
-const firebaseConfig = (() => {
-  // secrets.FIREBASE_SERVICE_ACCOUNT_VITE_REACT_F4C90の値を利用しfirebaseConfigを作成する
-  if (import.meta.env.VITE_FIREBASE_SERVICE_ACCOUNT) {
-    const serviceAccount = JSON.parse(
-      import.meta.env.VITE_FIREBASE_SERVICE_ACCOUNT
-    );
-    console.log("serviceAccount: ", serviceAccount);
-    return {
-      apiKey: serviceAccount.apiKey,
-      authDomain: serviceAccount.authDomain,
-      projectId: serviceAccount.projectId,
-      storageBucket: serviceAccount.storageBucket,
-      messagingSenderId: serviceAccount.messagingSenderId,
-      appId: serviceAccount.appId,
-      mesurementId: serviceAccount.measurementId,
-    };
-  } else {
-    return {
-      apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-      authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-      projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-      storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-      messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-      appId: import.meta.env.VITE_FIREBASE_APP_ID,
-      mesurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-    };
-  }
-})();
-
-console.log("firebaseConfig: ", firebaseConfig);
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  mesurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+};
 
 const app = initializeApp(firebaseConfig);
 
