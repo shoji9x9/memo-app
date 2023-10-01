@@ -10,10 +10,10 @@ export async function deleteMemo(memoId: string, loginUser?: LoginUser) {
       await deleteDoc(ref);
     } catch (e) {
       console.error(e);
-      // TODO: 例外をスロー
+      throw e;
     }
   } else {
-    console.error("User id is empty!");
-    console.error(loginUser);
+    console.error("User id is empty!", loginUser);
+    throw new Error();
   }
 }

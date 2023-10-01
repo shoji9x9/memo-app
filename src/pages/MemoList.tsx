@@ -16,6 +16,7 @@ import { Delete } from "@mui/icons-material";
 import { deleteMemo } from "../services/deleteMemo";
 import { messageAtom } from "../states/messageAtom";
 import { SimpleDialog } from "../components/SimpleDialog";
+import { exceptionMessage, successMessage } from "../utils/messages";
 
 export function MemoList(): JSX.Element {
   const [loginUser] = useRecoilState(userAtom);
@@ -23,7 +24,6 @@ export function MemoList(): JSX.Element {
   const [memoList, setMemoList] = useState<Memo[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedMemoId, setSelectedMemoId] = useState<string | undefined>();
-  const [clickDelete, setClickDelete] = useState(false);
   const navigate = useNavigate();
 
   const moveToMemo = (id?: string) => {
@@ -35,34 +35,50 @@ export function MemoList(): JSX.Element {
   };
 
   const getMemoList = useCallback(async () => {
-    const _memoList = await searchMemo(loginUser);
-    if (_memoList) {
-      setMemoList(_memoList);
+    try {
+      const _memoList = await searchMemo(loginUser);
+      if (_memoList) {
+        setMemoList(_memoList);
+      }
+    } catch (e) {
+      setMessageAtom((prev) => {
+        return {
+          ...prev,
+          ...exceptionMessage(),
+        };
+      });
     }
-  }, [loginUser, setMemoList]);
+  }, [loginUser, setMemoList, setMessageAtom]);
 
   const onClickDelete = async (id?: string) => {
     if (!id) {
       return;
     }
-    // TODO: 例外をキャッチしメッセージを出しわける
-    // TODO: メッセージを作成するユーティリティーを作る
-    await deleteMemo(id, loginUser);
-    setMessageAtom((prev) => {
-      return {
-        ...prev,
-        open: true,
-        text: "Deleted",
-        severity: "success",
-      };
-    });
-    setClickDelete(true);
+
+    try {
+      await deleteMemo(id, loginUser);
+      setMessageAtom((prev) => {
+        return {
+          ...prev,
+          ...successMessage("Deleted"),
+        };
+      });
+      setMemoList((prev) => {
+        return prev.filter((memo) => memo.id !== id);
+      });
+    } catch (e) {
+      setMessageAtom((prev) => {
+        return {
+          ...prev,
+          ...exceptionMessage(),
+        };
+      });
+    }
   };
 
   useEffect(() => {
     getMemoList();
-    setClickDelete(false);
-  }, [loginUser, getMemoList, clickDelete]);
+  }, [loginUser, getMemoList]);
 
   return (
     <>

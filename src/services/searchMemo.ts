@@ -25,10 +25,11 @@ export async function searchMemo(loginUser?: LoginUser) {
       return memos;
     } catch (e) {
       console.error(e);
+      throw e;
     }
   } else {
-    console.error("User id is empty!");
-    console.error(loginUser);
+    console.error("User id is empty!", loginUser);
+    throw new Error();
   }
 }
 
@@ -45,9 +46,10 @@ export async function searchMemoById(id: string, loginUser?: LoginUser) {
       }
     } catch (e) {
       console.error(e);
+      throw e;
     }
   } else {
-    console.error("User id is empty!");
-    console.error(loginUser);
+    console.error("User id is empty!", loginUser);
+    throw new Error();
   }
 }

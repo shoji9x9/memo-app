@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { messageAtom } from "../states/messageAtom";
 import { useNavigate, useParams } from "react-router-dom";
 import { searchMemoById } from "../services/searchMemo";
+import { exceptionMessage, successMessage } from "../utils/messages";
 
 export function Memo(): JSX.Element {
   const [loginUser] = useRecoilState(userAtom);
@@ -31,17 +32,24 @@ export function Memo(): JSX.Element {
       return;
     }
     const updatedAt = new Date();
-    await saveMemo({ id, title, content, updatedAt }, loginUser);
-    setMessageAtom((prev) => {
-      return {
-        ...prev,
-        open: true,
-        text: "Saved",
-        severity: "success",
-      };
-    });
+    try {
+      await saveMemo({ id, title, content, updatedAt }, loginUser);
+      setMessageAtom((prev) => {
+        return {
+          ...prev,
+          ...successMessage("Saved"),
+        };
+      });
 
-    backToMemoList();
+      backToMemoList();
+    } catch (e) {
+      setMessageAtom((prev) => {
+        return {
+          ...prev,
+          ...exceptionMessage(),
+        };
+      });
+    }
   };
 
   useEffect(() => {
@@ -50,15 +58,25 @@ export function Memo(): JSX.Element {
       if (!id) {
         return;
       }
-      const memo = await searchMemoById(id, loginUser);
-      if (memo) {
-        setTitle(memo.title);
-        setContent(memo.content);
+
+      try {
+        const memo = await searchMemoById(id, loginUser);
+        if (memo) {
+          setTitle(memo.title);
+          setContent(memo.content);
+        }
+      } catch (e) {
+        setMessageAtom((prev) => {
+          return {
+            ...prev,
+            ...exceptionMessage(),
+          };
+        });
       }
     };
 
     get();
-  }, [id, loginUser]);
+  }, [id, loginUser, setMessageAtom]);
 
   return (
     <>

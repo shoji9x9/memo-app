@@ -19,9 +19,10 @@ export async function saveMemo(memo: Memo, loginUser?: LoginUser) {
       }
     } catch (e) {
       console.error(e);
+      throw e;
     }
   } else {
-    console.error("User id is empty!");
-    console.error(loginUser);
+    console.error("User id is empty!", loginUser);
+    throw new Error();
   }
 }
