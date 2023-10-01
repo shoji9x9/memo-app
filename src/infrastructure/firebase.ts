@@ -8,10 +8,8 @@ import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
 const firebaseConfig = (() => {
   // secrets.FIREBASE_SERVICE_ACCOUNT_VITE_REACT_F4C90の値を利用しfirebaseConfigを作成する
-  if (import.meta.env.FIREBASE_SERVICE_ACCOUNT_VITE_REACT_F4C90) {
-    const serviceAccount = JSON.parse(
-      import.meta.env.FIREBASE_SERVICE_ACCOUNT_VITE_REACT_F4C90
-    );
+  if (import.meta.env.FIREBASE_SERVICE_ACCOUNT) {
+    const serviceAccount = JSON.parse(import.meta.env.FIREBASE_SERVICE_ACCOUNT);
     console.log("serviceAccount: ", serviceAccount);
     return {
       apiKey: serviceAccount.apiKey,
@@ -35,7 +33,7 @@ const firebaseConfig = (() => {
   }
 })();
 
-console.log(firebaseConfig);
+console.log("firebaseConfig: ", firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 
